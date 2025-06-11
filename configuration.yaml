@@ -1,0 +1,45 @@
+mqtt:
+  broker: twój_adres_mqtt
+  username: twój_login
+  password: twoje_hasło
+
+sensor:
+  - platform: mqtt
+    name: "Water Level"
+    state_topic: "homeassistant/sensor/water_monitor/level"
+    unit_of_measurement: "%"
+    device_class: humidity
+    
+  - platform: mqtt
+    name: "Water Pump State"
+    state_topic: "homeassistant/sensor/water_monitor/pump"
+    icon: mdi:pump
+    
+  - platform: mqtt
+    name: "Water Monitor Mode"
+    state_topic: "homeassistant/sensor/water_monitor/mode"
+    icon: mdi:water-sync
+    
+binary_sensor:
+  - platform: mqtt
+    name: "Low Water Sensor"
+    state_topic: "homeassistant/sensor/water_monitor/low_sensor"
+    payload_on: "WET"
+    payload_off: "DRY"
+    device_class: moisture
+    
+  - platform: mqtt
+    name: "High Water Sensor"
+    state_topic: "homeassistant/sensor/water_monitor/high_sensor"
+    payload_on: "WET"
+    payload_off: "DRY"
+    device_class: moisture
+
+switch:
+  - platform: mqtt
+    name: "Water Pump Control"
+    state_topic: "homeassistant/sensor/water_monitor/pump"
+    command_topic: "homeassistant/sensor/water_monitor/pump/set"
+    payload_on: "ON"
+    payload_off: "OFF"
+    icon: mdi:pump
